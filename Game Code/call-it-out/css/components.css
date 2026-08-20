@@ -1,0 +1,240 @@
+/* ================================================
+   CALL IT OUT — Component Styles
+   ================================================ */
+
+/* ---- Meters bar ---- */
+.meters-bar {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.meter { flex: 1; }
+.meter-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.meter-label span { font-weight: 700; }
+.meter-track {
+  height: 7px;
+  background: var(--surface2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.meter-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+.meter-fill.trust { background: var(--trust); }
+.meter-fill.sit   { background: var(--sit); }
+
+/* Points badge */
+.points-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-width: 56px;
+  background: var(--surface2);
+  border-radius: var(--radius-sm);
+  padding: 6px 10px;
+}
+.points-badge span { font-size: 1.1rem; font-weight: 700; color: var(--pts); }
+.points-badge small { font-size: 10px; color: var(--text-faint); font-weight: 600; text-transform: uppercase; }
+.points-badge.sm { min-width: 48px; }
+.points-badge.sm span { font-size: 0.95rem; }
+
+/* ---- Chat bubbles ---- */
+.chat-bubble {
+  background: var(--surface2);
+  border-left: 3px solid var(--border2);
+  border-radius: 0 10px 10px 10px;
+  padding: 0.55rem 0.85rem;
+  font-size: 13px;
+  max-width: 88%;
+  line-height: 1.5;
+  color: var(--text);
+}
+.chat-bubble .sender {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.chat-bubble.from-alex {
+  background: #1e2240;
+  border-left: none;
+  border-right: 3px solid var(--accent);
+  border-radius: 10px 0 10px 10px;
+  margin-left: auto;
+  text-align: right;
+}
+.chat-bubble.from-alex .sender { color: var(--accent-h); }
+.chat-bubble.system-msg {
+  background: transparent;
+  border: 1px dashed var(--border2);
+  border-radius: 8px;
+  text-align: center;
+  color: var(--text-faint);
+  font-size: 11px;
+  font-style: italic;
+  max-width: 100%;
+  padding: 0.4rem 0.75rem;
+}
+
+/* ---- Choices ---- */
+.choices { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.choice {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1.45;
+  transition: var(--transition);
+  text-align: left;
+  color: var(--text);
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  width: 100%;
+}
+.choice:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: var(--surface2);
+  transform: translateX(3px);
+}
+.choice:disabled { cursor: not-allowed; }
+
+.choice-letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--surface2);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  margin-top: 1px;
+  transition: var(--transition);
+}
+.choice:hover:not(:disabled) .choice-letter { background: var(--accent-dim); color: var(--accent-h); }
+
+.choice.correct {
+  border-color: var(--trust);
+  background: var(--trust-bg);
+  color: var(--trust-light);
+  transform: none;
+}
+.choice.correct .choice-letter { background: var(--trust); color: #fff; }
+
+.choice.wrong {
+  border-color: var(--sit);
+  background: var(--sit-bg);
+  color: var(--sit-light);
+}
+.choice.wrong .choice-letter { background: var(--sit); color: #fff; }
+
+/* ---- Feedback ---- */
+.feedback-box {
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  font-size: 14px;
+  line-height: 1.65;
+}
+.feedback-box.correct {
+  background: var(--trust-bg);
+  border: 1px solid var(--trust);
+  color: var(--trust-light);
+}
+.feedback-box.wrong {
+  background: var(--sit-bg);
+  border: 1px solid var(--sit);
+  color: var(--sit-light);
+}
+.feedback-box.neutral {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}
+.feedback-icon { font-size: 1rem; margin-right: 5px; }
+.feedback-hint {
+  margin-top: 0.5rem;
+  font-size: 12px;
+  color: var(--text-faint);
+  font-style: italic;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+/* ---- Hint ---- */
+.hint-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.6rem 1rem;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.hint-btn {
+  background: transparent;
+  border: 1px solid var(--warn);
+  color: var(--warn);
+  padding: 4px 14px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: var(--transition);
+}
+.hint-btn:hover:not(:disabled) { background: var(--warn); color: #000; }
+.hint-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+.hint-text {
+  display: none;
+  font-size: 13px;
+  color: var(--warn);
+  font-style: italic;
+  background: var(--warn-bg);
+  border: 1px solid var(--warn);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.9rem;
+  line-height: 1.55;
+}
+
+/* ---- Restart alert ---- */
+.restart-alert {
+  background: var(--warn-bg);
+  border: 1px solid var(--warn);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  text-align: center;
+  font-size: 14px;
+  color: var(--warn);
+  font-weight: 600;
+  animation: pulse 1s infinite alternate;
+}
+@keyframes pulse {
+  from { opacity: 0.7; }
+  to   { opacity: 1; }
+}

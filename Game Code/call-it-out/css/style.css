@@ -1,0 +1,125 @@
+/* ================================================
+   CALL IT OUT — Base Styles
+   503IT · Coventry University London
+   ================================================ */
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:          #0f1117;
+  --surface:     #1a1d27;
+  --surface2:    #22263a;
+  --surface3:    #2a2f47;
+  --border:      #2e3248;
+  --border2:     #3d4260;
+  --text:        #e8eaf0;
+  --text-muted:  #7b80a0;
+  --text-faint:  #4a5070;
+  --accent:      #7c6ff7;
+  --accent-h:    #a78bfa;
+  --accent-dim:  #3d3880;
+  --trust:       #3ea66b;
+  --trust-bg:    #0d2a1c;
+  --trust-light: #6de0a0;
+  --sit:         #e24b4a;
+  --sit-bg:      #2a0d0d;
+  --sit-light:   #f09595;
+  --warn:        #ef9f27;
+  --warn-bg:     #1c1500;
+  --pts:         #a78bfa;
+  --radius-sm:   6px;
+  --radius:      12px;
+  --radius-lg:   18px;
+  --radius-xl:   24px;
+  --transition:  0.2s ease;
+}
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+h1, h2, h3 { line-height: 1.2; font-weight: 700; }
+p { color: var(--text); }
+a { color: var(--accent-h); text-decoration: none; }
+a:hover { text-decoration: underline; }
+ul { list-style: none; }
+
+/* Colour helpers */
+.trust-col { color: var(--trust-light); }
+.sit-col   { color: var(--sit-light); }
+.pts-col   { color: var(--pts); }
+
+/* Screen system */
+.screen {
+  display: none;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 1.25rem 1rem 3rem;
+  animation: fadeUp 0.3s ease;
+}
+.screen.active { display: flex; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Page header */
+.page-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border);
+}
+.page-header h2 { font-size: 1.2rem; flex: 1; }
+.screen-sub { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: var(--transition);
+  text-align: center;
+  white-space: nowrap;
+}
+.btn:active { transform: scale(0.97); }
+.btn-primary  { background: var(--accent); color: #fff; }
+.btn-primary:hover  { background: var(--accent-h); }
+.btn-secondary { background: transparent; border: 1px solid var(--border2); color: var(--text); }
+.btn-secondary:hover { background: var(--surface2); }
+.btn-ghost { background: transparent; color: var(--text-muted); font-size: 14px; padding: 0.5rem 1rem; }
+.btn-ghost:hover { color: var(--text); }
+.btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+.back-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 13px;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+.back-btn:hover { background: var(--surface2); color: var(--text); }
+
+.nav-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.nav-row .btn { flex: 1; min-width: 140px; }

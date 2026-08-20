@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CALL IT OUT — Cyberbullying Awareness Game</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/screens.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+<body>
+
+  <!-- HOME -->
+  <div id="screen-home" class="screen active">
+    <div class="home-wrap">
+      <div class="logo-block">
+        <div class="logo-icon">📱</div>
+        <h1 class="game-logo">CALL IT <span>OUT</span></h1>
+        <p class="tagline">A cyberbullying awareness game</p>
+        <p class="built-by">503IT · Communication &amp; Collaboration · Coventry University London</p>
+      </div>
+      <div class="story-intro">
+        <p><strong>You are Alex, 15.</strong> One evening you open your phone and discover your friend <strong>Jordan</strong> is being targeted online — across group chats, gaming lobbies, and social media.</p>
+        <p style="margin-top:0.75rem">Every decision you make has consequences. The right choices protect Jordan. The wrong ones let the situation spiral.</p>
+      </div>
+      <div class="home-btns">
+        <button class="btn btn-primary" onclick="Game.goToStages()">▶&nbsp; Start Playing</button>
+        <button class="btn btn-secondary" onclick="Game.showScreen('screen-how')">How to Play</button>
+        <button class="btn btn-ghost" onclick="Game.showScreen('screen-about')">About This Game</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW TO PLAY -->
+  <div id="screen-how" class="screen">
+    <div class="page-header">
+      <button class="back-btn" onclick="Game.showScreen('screen-home')">&#8592; Back</button>
+      <h2>How to Play</h2>
+    </div>
+    <div class="how-grid">
+      <div class="how-card"><div class="how-icon">📖</div><h3>Read the scenario</h3><p>Each stage puts you in a real social situation involving cyberbullying. Read every message carefully.</p></div>
+      <div class="how-card"><div class="how-icon">🎯</div><h3>Make your choice</h3><p>Pick how Alex responds. Four options — only one is the best action to take.</p></div>
+      <div class="how-card"><div class="how-icon">📊</div><h3>Watch the meters</h3><p><span class="trust-col">Trust</span> = how supported Jordan feels. <span class="sit-col">Situation</span> = how far bullying has escalated. Keep Trust high, Situation low.</p></div>
+      <div class="how-card"><div class="how-icon">💡</div><h3>Earn &amp; spend points</h3><p>Correct choices earn <span class="pts-col">Awareness Points</span>. Spend 5 points to reveal a hint.</p></div>
+      <div class="how-card"><div class="how-icon">⚠️</div><h3>Don't let it escalate</h3><p>If Situation hits 100% the stage restarts. Think carefully and act early.</p></div>
+      <div class="how-card"><div class="how-icon">🏆</div><h3>Complete all 5 stages</h3><p>Stages unlock in order. Finish all five to reach the Resolution and see your final score.</p></div>
+    </div>
+    <button class="btn btn-primary" onclick="Game.goToStages()">Choose a Stage</button>
+  </div>
+
+  <!-- ABOUT -->
+  <div id="screen-about" class="screen">
+    <div class="page-header">
+      <button class="back-btn" onclick="Game.showScreen('screen-home')">&#8592; Back</button>
+      <h2>About This Game</h2>
+    </div>
+    <div class="about-card">
+      <h3>What is CALL IT OUT?</h3>
+      <p>CALL IT OUT is a browser-based, scenario-driven decision game designed to teach teenagers aged 12–17 how to recognise, respond to, and report cyberbullying.</p>
+      <p style="margin-top:0.75rem">The game places you in the role of a bystander — someone who witnesses cyberbullying happening to a friend. Research shows that bystander intervention is one of the most effective ways to stop cyberbullying.</p>
+      <h3 class="about-section-title">The 5 Stages</h3>
+      <ul class="about-list">
+        <li>💬 <strong>The Group Chat</strong> — embarrassing content shared without consent</li>
+        <li>🎮 <strong>The Gaming Lobby</strong> — exclusion and mockery in online gaming</li>
+        <li>👤 <strong>The Fake Account</strong> — impersonation and identity theft</li>
+        <li>🔥 <strong>The Pile On</strong> — pressure to participate and threats against bystanders</li>
+        <li>✅ <strong>Resolution</strong> — reporting, supporting, and recovery</li>
+      </ul>
+      <h3 class="about-section-title">Need real help?</h3>
+      <ul class="about-list">
+        <li>🇬🇧 <strong>Childline:</strong> 0800 1111 (free, 24/7)</li>
+        <li>🌐 <strong>childline.org.uk</strong></li>
+        <li>🏫 Talk to a trusted adult at school or home</li>
+      </ul>
+      <div class="about-credits">
+        <p>Developed by <strong>Pandeya &amp; Ishneha Rai</strong></p>
+        <p>503IT Communication &amp; Collaboration · Coventry University London · 2025–2026</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- STAGE SELECT -->
+  <div id="screen-stages" class="screen">
+    <div class="page-header">
+      <button class="back-btn" onclick="Game.showScreen('screen-home')">&#8592; Home</button>
+      <h2>Choose a Stage</h2>
+    </div>
+    <div class="meters-bar">
+      <div class="meter">
+        <div class="meter-label">Trust <span id="trust-pct">50%</span></div>
+        <div class="meter-track"><div class="meter-fill trust" id="trust-bar" style="width:50%"></div></div>
+      </div>
+      <div class="meter">
+        <div class="meter-label">Situation <span id="sit-pct">0%</span></div>
+        <div class="meter-track"><div class="meter-fill sit" id="sit-bar" style="width:0%"></div></div>
+      </div>
+      <div class="points-badge"><span id="pts-stages">0</span><small>pts</small></div>
+    </div>
+    <div class="stage-list" id="stage-list"></div>
+  </div>
+
+  <!-- GAME -->
+  <div id="screen-game" class="screen">
+    <div class="game-header">
+      <button class="back-btn" onclick="Game.goToStages()">&#8592; Stages</button>
+      <h2 id="game-stage-title"></h2>
+      <div class="points-badge sm"><span id="pts-game">0</span><small>pts</small></div>
+    </div>
+    <div class="meters-bar">
+      <div class="meter">
+        <div class="meter-label">Trust <span id="trust-pct2">50%</span></div>
+        <div class="meter-track"><div class="meter-fill trust" id="trust-bar2" style="width:50%"></div></div>
+      </div>
+      <div class="meter">
+        <div class="meter-label">Situation <span id="sit-pct2">0%</span></div>
+        <div class="meter-track"><div class="meter-fill sit" id="sit-bar2" style="width:0%"></div></div>
+      </div>
+    </div>
+    <div class="phone-wrap">
+      <div class="phone-frame">
+        <div class="phone-topbar">
+          <span id="stage-tag-phone"></span>
+          <span id="q-counter-phone"></span>
+        </div>
+        <div class="chat-area" id="chat-area"></div>
+      </div>
+    </div>
+    <div class="question-text" id="q-text"></div>
+    <div class="hint-row" id="hint-row">
+      <span>Stuck?</span>
+      <button class="hint-btn" id="hint-btn" onclick="Game.useHint()">Use hint (5 pts)</button>
+    </div>
+    <div class="hint-text" id="hint-text"></div>
+    <div class="choices" id="choices-box"></div>
+    <div class="feedback-box" id="feedback-box" style="display:none"></div>
+    <div class="restart-alert" id="restart-alert" style="display:none">⚠️ The situation has escalated too far. Restarting this stage...</div>
+    <div class="nav-row" id="nav-row" style="display:none">
+      <button class="btn btn-primary" id="next-btn" onclick="Game.nextQuestion()">Next</button>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div id="screen-summary" class="screen">
+    <div class="page-header">
+      <h2 id="sum-stage-name"></h2>
+      <p class="screen-sub">Stage Complete</p>
+    </div>
+    <div class="summary-hero">
+      <div class="summary-pts" id="sum-pts"></div>
+      <div class="summary-pts-lbl">Awareness Points earned this stage</div>
+    </div>
+    <div class="summary-grid">
+      <div class="summary-tile correct-tile"><div class="tile-val" id="sum-correct"></div><div class="tile-lbl">Correct</div></div>
+      <div class="summary-tile wrong-tile"><div class="tile-val" id="sum-wrong"></div><div class="tile-lbl">Wrong</div></div>
+      <div class="summary-tile trust-tile"><div class="tile-val" id="sum-trust"></div><div class="tile-lbl">Trust</div></div>
+      <div class="summary-tile sit-tile"><div class="tile-val" id="sum-sit"></div><div class="tile-lbl">Situation</div></div>
+    </div>
+    <div class="feedback-box" id="sum-feedback" style="margin-top:1rem"></div>
+    <div class="nav-row" style="margin-top:1rem">
+      <button class="btn btn-secondary" onclick="Game.goToStages()">Back to Stages</button>
+      <button class="btn btn-primary" id="next-stage-btn" onclick="Game.goNextStage()" style="display:none">Next Stage &#8594;</button>
+      <button class="btn btn-primary" id="final-score-btn" onclick="Game.showFinal()" style="display:none">Final Score &#8594;</button>
+    </div>
+  </div>
+
+  <!-- FINAL -->
+  <div id="screen-final" class="screen">
+    <div class="page-header"><h2>Game Complete</h2></div>
+    <div class="final-hero">
+      <div class="final-score-num" id="final-score"></div>
+      <div class="final-score-lbl">Total Awareness Points</div>
+    </div>
+    <div class="final-meters">
+      <div class="final-meter-item"><div class="final-meter-val trust-col" id="final-trust"></div><div class="final-meter-lbl">Final Trust</div></div>
+      <div class="final-meter-item"><div class="final-meter-val sit-col" id="final-sit"></div><div class="final-meter-lbl">Final Situation</div></div>
+      <div class="final-meter-item"><div class="final-meter-val pts-col" id="final-stages"></div><div class="final-meter-lbl">Stages Done</div></div>
+    </div>
+    <div class="final-message" id="final-message"></div>
+    <div class="nav-row">
+      <button class="btn btn-secondary" onclick="Game.resetGame()">Play Again</button>
+      <button class="btn btn-ghost" onclick="Game.showScreen('screen-about')">About</button>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
